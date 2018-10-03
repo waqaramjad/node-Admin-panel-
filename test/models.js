@@ -3,7 +3,6 @@ var chai = require('chai');
 var should = chai.should();
 var User = require('../models/User');
 
-// Note : If any tests fail after creating a user, this user will remain in the database and subsequent test runs will fail.  You will need to either manually remove the user or run the delete test.
 var TEST_USER_EMAIL = 'some_unique_user@someuniquetestuser.co';
 
 describe('User Model', function() {

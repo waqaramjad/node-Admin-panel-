@@ -2,13 +2,11 @@
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
-// Set up Mongo Schema
 var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String
 });
 
-// Before saving user, hash the password
 userSchema.pre('save', function(callback) {
   var user = this;
   if (!user.isModified('password')) {
@@ -29,7 +27,6 @@ userSchema.pre('save', function(callback) {
 });
 
 
-// Async verification of password
 userSchema.methods.verifyPassword = function(candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) {

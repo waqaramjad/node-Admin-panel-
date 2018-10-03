@@ -12,11 +12,9 @@ var app = express();
 console.log('q')
 
 
-// Local configuration
 var MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/test";
 var EXPRESS_PORT = process.env.PORT || 3000;
 
-// Mongo connection
 mongoose.connect(MONGODB_URL);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
@@ -24,7 +22,6 @@ mongoose.connection.on('error', function() {
 });
 console.log('w')
 
-// Express configuration, ordered by dependency chain.
 app.set('port', EXPRESS_PORT);
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -39,27 +36,22 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Make sure user is set on each response if logged in
 app.use(function(request, response, callback) {
   response.locals.user = request.user;
   callback();
 });
 
-// Save the original requested URI if detoured to log in
 app.use(function(request, response, callback) {
   if (/api/i.test(request.path)) {
     request.session.returnTo = request.path;
   }
   callback();
 });
-// Expose all static resources in /public for a year
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
-// Jade setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// Routing (must be initialized after Jade)
 var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var passportConf = require('./config/passport');
@@ -70,11 +62,9 @@ app.get('/logout', userController.logout);
 app.get('/signup', userController.signupPage);
 app.post('/signup', userController.signup);
 
-// Routing for authenticated pages
 app.get('/account', passportConf.isAuthenticated, userController.accountManagementPage);
 app.post('/account/delete', passportConf.isAuthenticated, userController.deleteAccount);
 
-// Start Express server
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });

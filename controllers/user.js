@@ -3,7 +3,6 @@ var passport = require('passport');
 var User = require('../models/User');
 
 exports.loginPage = function (request, response) {
-    // Redirect to index page if already logged in
     if (request.user) {
         return response.redirect('/');
     }
@@ -13,7 +12,6 @@ exports.loginPage = function (request, response) {
 };
 
 exports.login = function (request, response, callback) {
-    // input validation
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password cannot be blank').notEmpty();
 
@@ -24,7 +22,6 @@ exports.login = function (request, response, callback) {
         return response.redirect('/login');
     }
     
-    // This refers back to passport.js localStrategy named 'local'
     passport.authenticate('local', function (errors, user, validationMessages) {
         if (errors) {
             return callback(errors);
@@ -62,7 +59,6 @@ exports.signupPage = function (request, response) {
 };
 
 exports.signup = function (request, response, callback) {
-    // input validation
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password must be at least 8 characters long').len(8);
     request.assert('confirmPassword', 'Passwords do not match').equals(request.body.password);
@@ -84,7 +80,6 @@ exports.signup = function (request, response, callback) {
             return response.redirect('/signup');
         }
         
-        // Create and save the user if it doesn't exist
         var user = new User({
             email : request.body.email,
             password : request.body.password
@@ -94,7 +89,6 @@ exports.signup = function (request, response, callback) {
             if (err) {
                 return callback(err);
             }
-            // Log in on successful creation
             request.logIn(user, function (err) {
                 if (err) {
                     return callback(err);

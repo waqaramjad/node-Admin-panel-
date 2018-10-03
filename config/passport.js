@@ -30,7 +30,6 @@ var localStrategy = new LocalStrategy(
                 });
             }
             
-            // async
             user.verifyPassword(password, function(err, callbackResult) {
                 if (callbackResult) {
                     return callback(null, user);
@@ -42,7 +41,6 @@ var localStrategy = new LocalStrategy(
     });
 passport.use('local', localStrategy);
 
-// passport needs to serialize and deserialize users out of a session
 passport.serializeUser(function (user, callback) {
     callback(null, user.id);
 });
