@@ -99,23 +99,3 @@ exports.signup = function (request, response, callback) {
     });
 };
 
-// exports.accountManagementPage = function (request, response) {
-//     response.render('account/profile', {
-//         title : 'Account Management'
-//     });
-// };
-
-// exports.deleteAccount = function (request, response, callback) {
-//     User.remove({
-//         _id : request.user.id
-//     }, function (err) {
-//         if (err) {
-//             return callback(err);
-//         }
-//         request.logout();
-//         request.flash('info', {
-//             msg : 'Your account has been deleted.'
-//         });
-//         response.redirect('/');
-//     });
-// };

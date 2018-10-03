@@ -62,8 +62,6 @@ app.get('/logout', userController.logout);
 app.get('/signup', userController.signupPage);
 app.post('/signup', userController.signup);
 
-// app.get('/account', passportConf.isAuthenticated, userController.accountManagementPage);
-// app.post('/account/delete', passportConf.isAuthenticated, userController.deleteAccount);
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
