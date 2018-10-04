@@ -1,14 +1,11 @@
 {
-  "name": "node-express-mongo-login-starter",
+  "name": "node-project",
   "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/simondiep/node-express-mongo-login-starter.git"
-  },
+  
   "scripts": {
     "start": "node app.js",
-    "pretest": "jshint .",
-    "test": "mocha --reporter spec --timeout 1000"
+    "pretest": "jshint ."
+    
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

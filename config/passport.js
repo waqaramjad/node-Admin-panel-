@@ -11,10 +11,6 @@ exports.isAuthenticated = function (req, res, next) {
     res.redirect('/login');
 };
 
-/**
- * Setup for email/password login authentication
- * Call the callback with one or more parameters (errors, user, validationMessages)
- */
 var localStrategy = new LocalStrategy(
     {usernameField : 'email'},
     function (email, password, callback) {

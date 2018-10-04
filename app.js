@@ -9,7 +9,6 @@ var path = require('path');
 var flash = require('express-flash');
 
 var app = express();
-console.log('q')
 
 
 var MONGODB_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/test";
@@ -20,7 +19,6 @@ mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
-console.log('w')
 
 app.set('port', EXPRESS_PORT);
 app.use(logger('dev'));
