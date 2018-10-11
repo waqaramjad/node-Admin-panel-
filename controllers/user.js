@@ -26,7 +26,8 @@ exports.login = function (request, response, callback) {
             userMap[i] = user;
             i++
           });
-          console.log(userMap[0].email)
+          console.log(userMap)
+        
       
     })
 
