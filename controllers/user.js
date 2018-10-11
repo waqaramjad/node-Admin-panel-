@@ -3,20 +3,32 @@ var passport = require('passport');
 var User = require('../models/User');
 
 exports.loginPage = function (request, response) {
+    console.log(request.user)
     if (request.user) {
         return response.redirect('/');
     }
     response.render('account/login', {
-        title : 'Login'
+        title : 'Login' 
     });
 };
 
 exports.login = function (request, response, callback) {
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password cannot be blank').notEmpty();
+    User.find({}, function(err, users){
+        // console.dir(users)
+        var i =0 
+        var userMap = [];
+        users.forEach(function(user) {
+            userMap[i] = user;
+            i++
+          });
+          console.log(userMap[0].email)
+      
+    })
 
     var errors = request.validationErrors();
-
+  
     if (errors) {
         request.flash('errors', errors);
         return response.redirect('/login');
@@ -33,9 +45,6 @@ exports.login = function (request, response, callback) {
             return response.redirect('/login');
         }
         request.logIn(user, function (err) {
-            console.dir(user)
-
-
             if (err) {
                 return callback(err);
             }
