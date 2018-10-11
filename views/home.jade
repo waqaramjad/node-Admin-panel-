@@ -52,11 +52,11 @@ block content
              td #{item._id}
              td #{item.password}
              td
-              button.btn.btn-danger(type='button') Danger
-             td
-             td
-              button.btn.btn-info(type='button') info
-             td
+               form.form-horizontal(action='/account/delete', method='POST')
+               .form-group
+                button.btn.btn-danger(type='submit')
+                   | Delete 
+             
              
                  
          

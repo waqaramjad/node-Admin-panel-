@@ -17,7 +17,7 @@ userSchema.pre('save', function(callback) {
       return callback(err);
     }
     bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) {
+      if (err) {  
         return callback(err);
       }
       user.password = hash;
