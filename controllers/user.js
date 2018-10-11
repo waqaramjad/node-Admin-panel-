@@ -8,7 +8,10 @@ exports.loginPage = function (request, response) {
         return response.redirect('/');
     }
     response.render('account/login', {
-        title : 'Login' 
+        title : 'Login' , 
+        check : 'waqar amjad'
+        
+
     });
 };
 
@@ -48,6 +51,7 @@ exports.login = function (request, response, callback) {
             if (err) {
                 return callback(err);
             }
+            // response.render('/home', {hy : 'hello'})
             response.redirect(request.session.returnTo || '/');
         });
     })(request, response, callback);
