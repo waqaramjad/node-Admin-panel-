@@ -59,6 +59,7 @@ app.post('/login', userController.login);
 app.get('/logout', userController.logout);
 app.get('/signup', userController.signupPage);
 app.post('/signup', userController.signup);
+app.post('/delete' , userController.deleteAccount);
 
 
 app.listen(app.get('port'), function() {

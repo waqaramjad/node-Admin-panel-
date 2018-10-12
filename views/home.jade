@@ -25,10 +25,7 @@ block content
 
         
 
-         
-    html
-  head
-  body
+  
     .container
       h2 Basic Table
       |   
@@ -52,10 +49,11 @@ block content
              td #{item._id}
              td #{item.password}
              td
-               form.form-horizontal(action='/account/delete', method='POST')
-               .form-group
-                button.btn.btn-danger(type='submit')
-                   | Delete 
+               form.form-horizontal(action='/delete',  method='POST')
+                  
+                 button.btn.btn-danger(type='submit') Delete 
+
+
              
              
                  

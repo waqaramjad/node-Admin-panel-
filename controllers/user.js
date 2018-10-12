@@ -115,17 +115,20 @@ exports.signup = function (request, response, callback) {
 
 
 exports.deleteAccount = function (request, response, callback) {
-    User.remove({
-        _id : request.user.id
-    }, function (err) {
-        if (err) {
-            return callback(err);
-        }
-        request.logout();
-        request.flash('info', {
-            msg : 'Your account has been deleted.'
-        });
-        response.redirect('/');
-    });
+
+   var a = request.body.data
+    console.log(a)
+   // User.remove({
+    //     _id : request.user.id
+    // }, function (err) {
+    //     if (err) {
+    //         return callback(err);
+    //     }
+    //     request.logout();
+    //     request.flash('info', {
+    //         msg : 'Your account has been deleted.'
+    //     });
+    //     response.redirect('/');
+    // });
 };
 
