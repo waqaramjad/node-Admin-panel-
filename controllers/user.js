@@ -58,7 +58,7 @@ exports.login = function (request, response, callback) {
             }
         //    console.log(request.session.returnTo)
             // response.redirect(request.session.returnTo || '/');
-            response.render( 'home', {check  : userMap , user :true})
+            response.render( 'home', {check1  : userMap })
         });
     })(request, response, callback);
 };
