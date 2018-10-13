@@ -30,8 +30,8 @@ exports.login = function (request, response, callback) {
         //   console.log(users[0].email)
         var localStorage1 = require('localStorage')
         localStorage1.setItem('myKey', JSON.stringify(users));
-        var myValue = localStorage1.getItem('myKey');
-        let jsonObject = JSON.parse(myValue);
+        // var myValue = localStorage1.getItem('myKey');
+        // let jsonObject = JSON.parse(myValue);
         // console.log(jsonObject[0].password)
 
           var  localStorage;
