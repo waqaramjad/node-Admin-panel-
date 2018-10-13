@@ -21,40 +21,41 @@ block content
   else
     //- h1 Welcome #{user.email}!
     h1 my  ! 
-    //- h1 hy #{check[1]._id}
-    //- p.lead A table of user shown in future
-    //- -    each item in check
-    //-        h1 = #{item.email}
+    h1 hy #{check[0].password}
+    p.lead A table of user shown in future
+    -    each item in check
+           console.log('item')
+          //-  h1 = #{item.email}
+           con
 
         
 
   
-    //- .container
-    //-   h2 Basic Table
-    //-   |   
-    //-   p
-    //-     | The .table class adds basic styling (light padding and only horizontal dividers) to a table:
-    //-   |             
-    //-   |   
-    //-   table.table
-    //-     thead
-    //-       tr
-    //-         th Firstname
-    //-         |         
-    //-         th Lastname
-    //-         |         
-    //-         th Email
-    //-     |     
-    //-     tbody
-    //-      -  each item in check
-    //-        tr
-    //-          td #{item.email}
-    //-          td #{item._id}
-    //-          td #{item.password}
-    //-          td
-    //-            form.form-horizontal(action='/delete',  method='POST')
+    .container
+      h2 Basic Table
+      |   
+      p
+        | The .table class adds basic styling (light padding and only horizontal dividers) to a table:
+      |             
+      |   
+      table.table
+        thead
+          tr
+            th Firstname
+            |         
+            th Lastname
+            |         
+            th Email
+        |     
+        tbody
+         -  each item in check
+           tr
+             td #{item.email}
+             td #{item.password}
+             td
+               form.form-horizontal(action='/delete',  method='POST')
                   
-    //-              button.btn.btn-danger(type='submit') Delete 
+                 button.btn.btn-danger(type='submit') Delete 
 
 
              

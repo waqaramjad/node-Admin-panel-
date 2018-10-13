@@ -22,16 +22,29 @@ exports.login = function (request, response, callback) {
     User.find({}, function(err, users){
         // console.dir(users)
         var i =0 
-         userMap = [];
-        users.forEach(function(user) {
-            userMap[i] = user;
-            i++
-          });
-          console.log(userMap)
+        //  userMap = [];
+        // users.forEach(function(user) {
+        //     userMap[i] = user;
+        //     i++
+        //   });
+        //   console.log(users[0].email)
+        var localStorage1 = require('localStorage')
+        localStorage1.setItem('myKey', JSON.stringify(users));
+        var myValue = localStorage1.getItem('myKey');
+        let jsonObject = JSON.parse(myValue);
+        // console.log(jsonObject[0].password)
 
+          var  localStorage;
+          var  LocalStorage
         //   localStorage.setItem('user', userMap )
+        if (typeof localStorage === "undefined" || localStorage === null) {
+            var LocalStorage = require('node-localstorage').LocalStorage;
+             localStorage = new LocalStorage('../scratch');
+          }
+
+          localStorage.setItem("userList", users);
          
-        
+        //   console.log(localStorage.getItem('userList'));
       
     })
 
@@ -57,8 +70,8 @@ exports.login = function (request, response, callback) {
                 return callback(err);
             }
         //    console.log(request.session.returnTo)
-            // response.redirect(request.session.returnTo || '/');
-            response.render( 'home', {check1  : userMap })
+            response.redirect(request.session.returnTo || '/');
+            // response.render( 'home', {check1  : userMap })
         });
     })(request, response, callback);
 };
