@@ -1,3 +1,4 @@
+
 'use strict';
 var passport = require('passport');
 var User = require('../models/User');
@@ -10,23 +11,26 @@ exports.loginPage = function (request, response) {
     response.render('account/login', {
         title : 'Login' , 
         check : 'waqar amjad'
-        
-
     });
 };
 
 exports.login = function (request, response, callback) {
+
+    var userMap
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password cannot be blank').notEmpty();
     User.find({}, function(err, users){
         // console.dir(users)
         var i =0 
-        var userMap = [];
+         userMap = [];
         users.forEach(function(user) {
             userMap[i] = user;
             i++
           });
           console.log(userMap)
+
+        //   localStorage.setItem('user', userMap )
+         
         
       
     })
@@ -52,8 +56,9 @@ exports.login = function (request, response, callback) {
             if (err) {
                 return callback(err);
             }
-            // response.render('/home', {hy : 'hello'})
-            response.redirect(request.session.returnTo || '/');
+        //    console.log(request.session.returnTo)
+            // response.redirect(request.session.returnTo || '/');
+            response.render( 'home', {check  : userMap , user :true})
         });
     })(request, response, callback);
 };
