@@ -134,10 +134,10 @@ exports.signup = function (request, response, callback) {
 
 exports.deleteAccount = function (request, response, callback) {
 
-    console.log(request.user);
-   var a = request.body.data
+    // console.log(request.body.id );
+//    var a = request.body.data
    User.remove({
-        _id : request.user.id
+        _id : request.body.id
     }, function (err) {
         if (err) {
             return callback(err);
