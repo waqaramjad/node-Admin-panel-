@@ -27,7 +27,6 @@ block content
            console.log('item')
           //-  h1 = #{item.email}
            con
-
         
 
   
@@ -52,10 +51,9 @@ block content
            tr
              td #{item.email}
              td #{item.password}
-             td
+             td #{item._id}
                form.form-horizontal(action='/delete',  method='POST')
-                  
-                 button.btn.btn-danger(type='submit') Delete 
+                   button.btn.btn-danger(type='submit') Delete 
 
 
              
