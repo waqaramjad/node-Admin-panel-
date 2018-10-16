@@ -131,6 +131,11 @@ exports.signup = function (request, response, callback) {
     });
 };
 
+exports.accountManagementPage = function (request, response) {
+    response.render('account/profile', {
+        title : 'Account Management'
+    });
+};
 
 exports.deleteAccount = function (request, response, callback) {
 

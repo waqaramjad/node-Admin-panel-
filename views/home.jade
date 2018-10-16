@@ -67,6 +67,12 @@ block content
                 input(type="hidden",id="id", name= 'id',value="#{item._id}")
                 button.btn.btn-danger(type='submit') Delete 
 
+
+                form.form-horizontal(action='/delete',  method='POST')
+                input(type="hidden",id="id", name= 'id',value="#{item._id}")
+                button.btn.btn-primary(type='submit') update 
+
+
                   //-  form(action="/delete",method="post")
                   //-   input(type="hidden",id="id",value="#{item.id}")
                   //-   button#btnSubmit(type="button") Delete
