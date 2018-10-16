@@ -121,10 +121,19 @@ exports.signup = function (request, response, callback) {
             if (err) {
                 return callback(err);
             }
+            
+
             request.logIn(user, function (err) {
                 if (err) {
                     return callback(err);
-                }
+                } 
+
+                User.find({}, function(err, users){
+                    var localStorage1 = require('localStorage')
+              localStorage1.setItem('myKey', JSON.stringify(users));   
+                      })
+                 
+
                 response.redirect('/');
             });
         });
