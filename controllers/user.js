@@ -20,23 +20,12 @@ exports.login = function (request, response, callback) {
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password cannot be blank').notEmpty();
     User.find({}, function(err, users){
-        // console.dir(users)
         var i =0 
-        //  userMap = [];
-        // users.forEach(function(user) {
-        //     userMap[i] = user;
-        //     i++
-        //   });
-        //   console.log(users[0].email)
         var localStorage1 = require('localStorage')
         localStorage1.setItem('myKey', JSON.stringify(users));
-        // var myValue = localStorage1.getItem('myKey');
-        // let jsonObject = JSON.parse(myValue);
-        // console.log(jsonObject[0].password)
 
           var  localStorage;
           var  LocalStorage
-        //   localStorage.setItem('user', userMap )
         if (typeof localStorage === "undefined" || localStorage === null) {
             var LocalStorage = require('node-localstorage').LocalStorage;
              localStorage = new LocalStorage('../scratch');
@@ -44,7 +33,6 @@ exports.login = function (request, response, callback) {
 
           localStorage.setItem("userList", users);
          
-        //   console.log(localStorage.getItem('userList'));
       
     })
 
@@ -69,9 +57,7 @@ exports.login = function (request, response, callback) {
             if (err) {
                 return callback(err);
             }
-        //    console.log(request.session.returnTo)
             response.redirect(request.session.returnTo || '/');
-            // response.render( 'home', {check1  : userMap })
         });
     })(request, response, callback);
 };
@@ -153,8 +139,6 @@ accountManagementPage = function (request, response) {
 
 exports.deleteAccount = function (request, response, callback) {
 
-    // console.log(request.body.id );
-//    var a = request.body.data
    User.remove({
         _id : request.body.id
     }, function (err) {
@@ -174,7 +158,6 @@ exports.updateAccount = function (request, response, callback) {
 
     console.log(request.body)
     var userId = request.body.id
-    // var email = request.body.email
 
     var conditions = {
         _id : userId 
@@ -186,10 +169,8 @@ exports.updateAccount = function (request, response, callback) {
        }
        User.findOneAndUpdate(conditions,update,function(error,result){
         if(error){
-          // handle error
           console.log(error)
         }else{
-        //   console.log(result);
           request.logout();
           request.flash('info', {
               msg : ' account has been updated.'
@@ -197,20 +178,6 @@ exports.updateAccount = function (request, response, callback) {
           response.redirect('/');
         }
       });
-    // console.log(request.body.id );
-//    var a = request.body.data
 
-//    User.remove({
-//         _id : request.body.id
-//     }, function (err) {
-//         if (err) {
-//             return callback(err);
-//         }
-//         request.logout();
-//         request.flash('info', {
-//             msg : 'Your account has been deleted.'
-//         });
-//         response.redirect('/');
-//     });
 };
 
