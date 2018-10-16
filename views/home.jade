@@ -70,6 +70,7 @@ block content
 
                form.form-horizontal(action='/account',  method='POST')
                 input(type="hidden",id="id", name= 'id',value="#{item._id}")
+                input(type="hidden",id="email", name= 'email',value="#{item.email}")
                 button.btn.btn-primary(type='submit') update 
 
 

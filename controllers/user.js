@@ -136,7 +136,8 @@ accountManagementPage = function (request, response) {
     console.log(request.body.id)
     response.render('account/profile', {
         title : 'Account Management', 
-        id : request.body.id
+        id : request.body.id , 
+        email : request.body.email
 
     });
 };
@@ -158,10 +159,13 @@ exports.deleteAccount = function (request, response, callback) {
         response.redirect('/');
     });
 };
+
+
 exports.updateAccount = function (request, response, callback) {
 
     console.log(request.body)
     var userId = request.body.id
+    // var email = request.body.email
 
     var conditions = {
         _id : userId 

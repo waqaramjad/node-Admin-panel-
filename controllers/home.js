@@ -13,6 +13,8 @@ exports.homePage = function(request, response) {
     if(myValue != undefined) 
     console.log(jsonObject[0])
 
+    console.log('home.js ')
+
 
 
 

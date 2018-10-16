@@ -19,9 +19,9 @@ block content
      
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
-        input.form-control(type='email', name='email', id='email')
+        input.form-control(type='email', value="#{email}",  name='email', id='email')
         input(type="hidden",id="id", name= 'id',value="#{id}")
       .col-sm-offset-3.col-sm-4
         button.btn.btn-danger(type='submit')
           i.fa.fa-trash
-          | Delete my account
+          | Update
