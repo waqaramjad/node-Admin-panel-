@@ -23,55 +23,42 @@ block content
         p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
   else
     
-    h1 my  ! 
-    h1 hy #{check[0].password}
-    p.lead A table of user shown in future
+    
+    //- p.lead User Table
     -    each item in check
-           console.log('item')
+          
           //-  h1 = #{item.email}
            con
       
 
   
     .container
-      h2 Basic Table
-      |   
-      p
-        | The .table class adds basic styling (light padding and only horizontal dividers) to a table:
-      |             
+      h2 User Table
+            
       |   
       table.table
         thead
           tr
-            th Firstname
+            th email
             |         
-            th Lastname
+            th User ID
             |         
-            th Email
+            th Actions
         |     
         tbody
          -  each item in check
            tr
              td #{item.email}
-             td #{item.password}
-            
-             script.
-              var something = function(a) {
-                console.log(a)
-              }
-
-            button#4(onclick='something(this.id)') Click
              td #{item._id}
-             
-               form.form-horizontal(action='/delete',  method='POST')
-                input(type="hidden",id="id", name= 'id',value="#{item._id}")
-                button.btn.btn-danger(type='submit') Delete 
-
-
-               form.form-horizontal(action='/account',  method='POST')
-                input(type="hidden",id="id", name= 'id',value="#{item._id}")
-                input(type="hidden",id="email", name= 'email',value="#{item.email}")
-                button.btn.btn-primary(type='submit') update 
+             td  
+              form.form-horizontal(action='/delete',  method='POST')
+                   input(type="hidden",id="id", name= 'id',value="#{item._id}")
+                   button.btn.btn-danger(type='submit') Delete 
+             td  
+              form.form-horizontal(action='/account',  method='POST')
+                  input(type="hidden",id="id", name= 'id',value="#{item._id}")
+                  input(type="hidden",id="email", name= 'email',value="#{item.email}")
+                  button.btn.btn-primary(type='submit') Update 
 
 
                   //-  form(action="/delete",method="post")
