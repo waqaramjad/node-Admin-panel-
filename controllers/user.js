@@ -10,7 +10,7 @@ exports.loginPage = function (request, response) {
     }
     response.render('account/login', {
         title : 'Login' , 
-        check : 'waqar amjad'
+       
     });
 };
 
@@ -20,19 +20,9 @@ exports.login = function (request, response, callback) {
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password cannot be blank').notEmpty();
     User.find({}, function(err, users){
-        var i =0 
         var localStorage1 = require('localStorage')
         localStorage1.setItem('myKey', JSON.stringify(users));
 
-          var  localStorage;
-          var  LocalStorage
-        if (typeof localStorage === "undefined" || localStorage === null) {
-            var LocalStorage = require('node-localstorage').LocalStorage;
-             localStorage = new LocalStorage('../scratch');
-          }
-
-          localStorage.setItem("userList", users);
-         
       
     })
 
@@ -167,17 +157,23 @@ exports.updateAccount = function (request, response, callback) {
         email : request.body.email
        
        }
-       User.findOneAndUpdate(conditions,update,function(error,result){
-        if(error){
-          console.log(error)
-        }else{
-          request.logout();
-          request.flash('info', {
-              msg : ' account has been updated.'
+      
+
+        User.findOneAndUpdate(conditions,update,function(error,result){
+            if(error){
+              console.log(error)
+            }else{
+              request.logout();
+              request.flash('info', {
+                  msg : ' account has been updated.'
+              });
+              response.redirect('/');
+            }
           });
-          response.redirect('/');
-        }
-      });
+    
+       
+
+      
 
 };
 
