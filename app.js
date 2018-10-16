@@ -62,8 +62,8 @@ app.post('/signup', userController.signup);
 app.post('/delete' , userController.deleteAccount);
 
 
-app.post('/account/delete', passportConf.isAuthenticated, userController.deleteAccount);
-app.get('/account', passportConf.isAuthenticated, userController.accountManagementPage);
+app.post('/account/update', passportConf.isAuthenticated, userController.updateAccount);
+app.post('/account', userController.accountManagementPage);
 
 
 app.listen(app.get('port'), function() {

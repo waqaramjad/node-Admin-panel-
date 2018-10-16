@@ -131,9 +131,13 @@ exports.signup = function (request, response, callback) {
     });
 };
 
-exports.accountManagementPage = function (request, response) {
+exports.
+accountManagementPage = function (request, response) {
+    console.log(request.body.id)
     response.render('account/profile', {
-        title : 'Account Management'
+        title : 'Account Management', 
+        id : request.body.id
+
     });
 };
 
@@ -153,5 +157,47 @@ exports.deleteAccount = function (request, response, callback) {
         });
         response.redirect('/');
     });
+};
+exports.updateAccount = function (request, response, callback) {
+
+    console.log(request.body)
+    var userId = request.body.id
+
+    var conditions = {
+        _id : userId 
+       }
+
+       var update = {
+        email : request.body.email
+       
+       }
+       User.findOneAndUpdate(conditions,update,function(error,result){
+        if(error){
+          // handle error
+          console.log(error)
+        }else{
+        //   console.log(result);
+          request.logout();
+          request.flash('info', {
+              msg : ' account has been updated.'
+          });
+          response.redirect('/');
+        }
+      });
+    // console.log(request.body.id );
+//    var a = request.body.data
+
+//    User.remove({
+//         _id : request.body.id
+//     }, function (err) {
+//         if (err) {
+//             return callback(err);
+//         }
+//         request.logout();
+//         request.flash('info', {
+//             msg : 'Your account has been deleted.'
+//         });
+//         response.redirect('/');
+//     });
 };
 

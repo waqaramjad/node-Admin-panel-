@@ -2,22 +2,25 @@ extends ../layout
 
 block content
   .page-header
-    h3 Profile Information
-
-  form.form-horizontal(action='/account/profile', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='email') Email
-      .col-sm-7
-        input.form-control(type='email', name='email', id='email', value='#{user.email}', disabled)
+  //-   h3 Profile Information
+  //-   h3 #{id}
+  //- form.form-horizontal(action='/account/profile', method='POST')
+  //-   input(type='hidden', name='_csrf', value=_csrf)
+  //-   .form-group
+  //-     label.col-sm-3.control-label(for='email') Email
+  //-     .col-sm-7
+  //-       input.form-control(type='email', name='email', id='email')
         
   .page-header
-    h3 Delete Account
+    h3 Update Account
 
-  form.form-horizontal(action='/account/delete', method='POST')
+  form.form-horizontal(action='/account/update', method='POST')
     .form-group
-      p.col-sm-offset-3.col-sm-4 If you delete your account, it is for good.
-      input(type='hidden', name='_csrf', value=_csrf)
+     
+      label.col-sm-3.control-label(for='email') Email
+      .col-sm-7
+        input.form-control(type='email', name='email', id='email')
+        input(type="hidden",id="id", name= 'id',value="#{id}")
       .col-sm-offset-3.col-sm-4
         button.btn.btn-danger(type='submit')
           i.fa.fa-trash
