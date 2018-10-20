@@ -2,9 +2,15 @@
 'use strict';
 var passport = require('passport');
 var User = require('../models/User');
+var bcrypt = require('bcrypt-nodejs');
 
 exports.loginPage = function (request, response) {
     console.log(request.user)
+    var a = '12345678'
+    var hash = bcrypt.hashSync(a);
+    console.log(hash)
+    console.log(bcrypt.compareSync('12345678', hash))
+
     if (request.user) {
         return response.redirect('/');
     }
@@ -78,6 +84,7 @@ exports.signup = function (request, response, callback) {
         return response.redirect('/signup');
     }
 
+    console.log(request.body)
     User.findOne({
         email : request.body.email
     }, function (err, existingUser) {
@@ -93,11 +100,14 @@ exports.signup = function (request, response, callback) {
             password : request.body.password
         });
         
+        console.log(user)
         user.save(function (err) {
             if (err) {
                 return callback(err);
             }
             
+            console.log(user)
+            console.log(err)
 
             request.logIn(user, function (err) {
                 if (err) {
@@ -147,17 +157,34 @@ exports.deleteAccount = function (request, response, callback) {
 exports.updateAccount = function (request, response, callback) {
 
     console.log(request.body)
+    request.assert('email', 'Email is not valid').isEmail();
+    request.assert('password', 'Password must be at least 8 characters long').len(8);
+    request.assert('confirmPassword', 'Passwords do not match').equals(request.body.password);
+    var errors = request.validationErrors();
+
+
+    if (errors) {
+        request.flash('errors', errors);
+        return response.redirect('/');
+    }
+
+    // console.log(request.body)
+    // console.log(request.body.password)
+    // console.log(request.assert('email', 'Email is not valid').isEmail())
+    // console.log(request.assert('password', 'Password must be at least 8 characters long').len(8))
     var userId = request.body.id
 
     var conditions = {
         _id : userId 
+
        }
 
        var update = {
-        email : request.body.email
+        email : request.body.email  , 
+        password:  request.body.password 
        
        }
-      
+      console.log(update)
 
         User.findOneAndUpdate(conditions,update,function(error,result){
             if(error){
