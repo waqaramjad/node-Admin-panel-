@@ -6,11 +6,6 @@ var bcrypt = require('bcrypt-nodejs');
 
 exports.loginPage = function (request, response) {
     console.log(request.user)
-    var a = '12345678'
-    var hash = bcrypt.hashSync(a);
-    console.log(hash)
-    console.log(bcrypt.compareSync('12345678', hash))
-
     if (request.user) {
         return response.redirect('/');
     }
@@ -178,10 +173,14 @@ exports.updateAccount = function (request, response, callback) {
         _id : userId 
 
        }
+       var mypass =  request.body.password
+       var hash = bcrypt.hashSync(mypass);
+   
+   
 
        var update = {
         email : request.body.email  , 
-        password:  request.body.password 
+        password:  hash
        
        }
       console.log(update)
