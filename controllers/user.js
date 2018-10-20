@@ -5,7 +5,6 @@ var User = require('../models/User');
 var bcrypt = require('bcrypt-nodejs');
 
 exports.loginPage = function (request, response) {
-    console.log(request.user)
     if (request.user) {
         return response.redirect('/');
     }
@@ -70,7 +69,7 @@ exports.signupPage = function (request, response) {
 exports.signup = function (request, response, callback) {
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password must be at least 8 characters long').len(8);
-    request.assert('confirmPassword', 'Passwords do not match').equals(request.body.password);
+    request.assert('confirmPassword', 'Passwords does not match').equals(request.body.password);
 
     var errors = request.validationErrors();
 
@@ -79,7 +78,6 @@ exports.signup = function (request, response, callback) {
         return response.redirect('/signup');
     }
 
-    console.log(request.body)
     User.findOne({
         email : request.body.email
     }, function (err, existingUser) {
@@ -95,14 +93,11 @@ exports.signup = function (request, response, callback) {
             password : request.body.password
         });
         
-        console.log(user)
         user.save(function (err) {
             if (err) {
                 return callback(err);
             }
             
-            console.log(user)
-            console.log(err)
 
             request.logIn(user, function (err) {
                 if (err) {
@@ -123,7 +118,6 @@ exports.signup = function (request, response, callback) {
 
 exports.
 accountManagementPage = function (request, response) {
-    console.log(request.body.id)
     response.render('account/update', {
         title : 'Account Management', 
         id : request.body.id , 
@@ -151,10 +145,9 @@ exports.deleteAccount = function (request, response, callback) {
 
 exports.updateAccount = function (request, response, callback) {
 
-    console.log(request.body)
     request.assert('email', 'Email is not valid').isEmail();
     request.assert('password', 'Password must be at least 8 characters long').len(8);
-    request.assert('confirmPassword', 'Passwords do not match').equals(request.body.password);
+    request.assert('confirmPassword', 'Passwords does not match').equals(request.body.password);
     var errors = request.validationErrors();
 
 
@@ -179,11 +172,9 @@ exports.updateAccount = function (request, response, callback) {
         password:  hash
        
        }
-      console.log(update)
 
         User.findOneAndUpdate(conditions,update,function(error,result){
             if(error){
-              console.log(error)
             }else{
               request.logout();
               request.flash('info', {
