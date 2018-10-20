@@ -124,7 +124,7 @@ exports.signup = function (request, response, callback) {
 exports.
 accountManagementPage = function (request, response) {
     console.log(request.body.id)
-    response.render('account/profile', {
+    response.render('account/update', {
         title : 'Account Management', 
         id : request.body.id , 
         email : request.body.email
@@ -163,10 +163,6 @@ exports.updateAccount = function (request, response, callback) {
         return response.redirect('/');
     }
 
-    // console.log(request.body)
-    // console.log(request.body.password)
-    // console.log(request.assert('email', 'Email is not valid').isEmail())
-    // console.log(request.assert('password', 'Password must be at least 8 characters long').len(8))
     var userId = request.body.id
 
     var conditions = {
